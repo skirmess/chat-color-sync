@@ -1,0 +1,8 @@
+## Interface: 30100
+## Title: ChatColorSync
+## Author: Kring
+## Notes: Synchronizes the chat channel color between chars
+## OptionalDeps:
+## Dependencies:
+## SavedVariables: ChatColorSync
+ChatColorSync.xml
