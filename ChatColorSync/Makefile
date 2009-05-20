@@ -1,7 +1,7 @@
 
 .PHONY: clean tag release
 
-VERSION=1
+VERSION=2
 
 clean:
 	rm -f *~
@@ -12,9 +12,11 @@ tag: clean
 release: clean
 	( cd ..;							\
 		rm -f ChatColorSync-$(VERSION).zip;			\
-		find ChatColorSync -name CVS -prune -o			\
-	       		       -name Makefile -prune -o			\
-			       -name '.*.swp' -prune -o			\
-			       -print					\
+		find ChatColorSync					\
+				-name CVS -prune -o			\
+				-name .svn -prune -o			\
+				-name Makefile -prune -o		\
+				-name '.*.swp' -prune -o		\
+				-print					\
 		| zip -@ ChatColorSync-$(VERSION).zip;			\
 	)	
