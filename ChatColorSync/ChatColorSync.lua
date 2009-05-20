@@ -1,5 +1,5 @@
 
-local ChatColorSync_Version = 2
+local ChatColorSync_Version = 3
 local ChatColorSync_loaded = false
 
 local function log (msg)
