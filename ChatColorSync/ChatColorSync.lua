@@ -1,5 +1,7 @@
 
-local ChatColorSync_Version = 3
+-- Copyright (c) 2009, Sven Kirmess
+
+local ChatColorSync_Version = 4
 local ChatColorSync_loaded = false
 
 local function log (msg)
@@ -112,7 +114,7 @@ local function SynchronizeChannelColorWithDB (chatType, name)
 
 		if ( ChatColorSync[name] ) then
 			log("Broken entry in SavedVariables.lua detected for channel '"..name.."'. Removing the broken entry.")
-		
+
 			ChatColorSync[name] = nil
 		end
 
@@ -125,7 +127,7 @@ local function SynchronizeChannelColorWithDB (chatType, name)
 	if ( ( r and ( r ~= ChatColorSync[name].r ) ) or
 	     ( g and ( g ~= ChatColorSync[name].g ) ) or
 	     ( b and ( b ~= ChatColorSync[name].b ) ) ) then
-		
+
 		log(string.format("Setting color for channel '%s' to %i/%i/%i (changed by %s)",
 			name,
 			ChatColorSync[name].r,
@@ -162,7 +164,7 @@ local function SyncAllChannels ()
 	end
 
 	-- Sunc all other channels
-	local channelsToSync = { 
+	local channelsToSync = {
 
 		-- Player Messages
 		"SAY",
@@ -221,7 +223,7 @@ local function SyncAllChannels ()
 		SynchronizeChannelColorWithDB(chatType, chatType)
 	end
 end
-	
+
 local function CHAT_MSG_CHANNEL_NOTICE (eventType, channelType, channelNumber, channelName)
 
 	if ( not eventType or not channelType or not channelNumber or not channelName ) then
@@ -294,7 +296,7 @@ function ChatColorSync_OnEvent (frame, event, arg1, arg2, arg3, arg4, arg5, arg6
 		-- arg4		Channel name with number (e.g. "6. TestChannel")
 		--
 		-- arg7		Channel Type (e.g. 0 for any user channel,
-		--		1 for system-channel "General", 2 for "Trade") 
+		--		1 for system-channel "General", 2 for "Trade")
 		--
 		-- arg8		Channel Number
 		--
