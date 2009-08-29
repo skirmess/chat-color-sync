@@ -10,7 +10,6 @@ tag: clean
 	cvs tag ChatColorSync-$(VERSION)
 
 release: clean
-	CHANGES=`svn st`; if [ -n "$$CHANGES" ]; then echo "### uncommited changes";  false; fi
 	( cd ..;							\
 		rm -f ChatColorSync-$(VERSION).zip;			\
 		find ChatColorSync					\
