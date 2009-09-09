@@ -258,7 +258,9 @@ local function UPDATE_CHAT_COLOR(chatType, r, g, b)
 	SaveChannelColorToDB(index, r, g, b)
 end
 
-local function EventHandler(self, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+local function EventHandler(self, event, ...)
+
+	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9 = ...
 
 	if ( event == "PLAYER_ENTERING_WORLD" ) then
 
