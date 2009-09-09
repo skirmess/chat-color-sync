@@ -8,8 +8,11 @@ characters.
 
 *** Changelog
 
+Version 5
+ * Code cleanup.
+
 Version 4
-Updated TOC for WoW 3.2
+ * Updated TOC for WoW 3.2
  * Added license information
  * Added link to project main page at
  * http://code.google.com/p/chat-color-sync/

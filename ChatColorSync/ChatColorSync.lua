@@ -1,7 +1,7 @@
 
 -- Copyright (c) 2009, Sven Kirmess
 
-local ChatColorSync_Version = 4
+local ChatColorSync_Version = 5
 local ChatColorSync_loaded = false
 
 local function log (msg)
@@ -148,7 +148,6 @@ local function SynchronizeChannelColorWithDB (chatType, name)
 
 	-- Channel color is already in sync with database
 end
-
 
 local function SyncAllChannels ()
 
