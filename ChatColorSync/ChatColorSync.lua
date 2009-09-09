@@ -4,7 +4,7 @@
 local Version = 5
 local Loaded = false
 
-local function log (msg)
+local function log(msg)
 
 	if ( msg == nil ) then
 		return
@@ -20,7 +20,7 @@ end
 -- Input: "General - Ironforge"
 -- Output: "General"
 --
-local function GetChannelGenericName (name)
+local function GetChannelGenericName(name)
 
 	local i, j = string.find(name, " ")
 
@@ -34,7 +34,7 @@ local function GetChannelGenericName (name)
 	return name
 end
 
-local function GetChannelNameByTypeName (chatType)
+local function GetChannelNameByTypeName(chatType)
 
 	local channelNumber, count = string.gsub(chatType, "CHANNEL", "")
 
@@ -68,7 +68,7 @@ local function GetChannelNameByTypeName (chatType)
 	return name
 end
 
-local function SaveChannelColorToDB (index, r, g, b)
+local function SaveChannelColorToDB(index, r, g, b)
 
 	if ( ChatColorSync[index] == nil ) then
 		ChatColorSync[index] = { }
@@ -80,7 +80,7 @@ local function SaveChannelColorToDB (index, r, g, b)
 	ChatColorSync[index].set_by = UnitName("player")
 end
 
-local function GetChatTypeInfo (chatType)
+local function GetChatTypeInfo(chatType)
 
 	if ( ( ChatTypeInfo[chatType] == nil ) or
 	     ( not ChatTypeInfo[chatType].r ) or
@@ -98,7 +98,7 @@ local function GetChatTypeInfo (chatType)
 	return r, g, b
 end
 
-local function SynchronizeChannelColorWithDB (chatType, name)
+local function SynchronizeChannelColorWithDB(chatType, name)
 
 	local r, g, b = GetChatTypeInfo(chatType)
 
@@ -149,7 +149,7 @@ local function SynchronizeChannelColorWithDB (chatType, name)
 	-- Channel color is already in sync with database
 end
 
-local function SyncAllChannels ()
+local function SyncAllChannels()
 
 	-- Sync the 10 custom channels
 	local i
@@ -223,7 +223,7 @@ local function SyncAllChannels ()
 	end
 end
 
-local function CHAT_MSG_CHANNEL_NOTICE (eventType, channelType, channelNumber, channelName)
+local function CHAT_MSG_CHANNEL_NOTICE(eventType, channelType, channelNumber, channelName)
 
 	if ( not eventType or not channelType or not channelNumber or not channelName ) then
 		log("Ignoring malformed CHAT_MSG_CHANNEL_NOTICE event.")
@@ -237,7 +237,7 @@ local function CHAT_MSG_CHANNEL_NOTICE (eventType, channelType, channelNumber, c
 	end
 end
 
-local function UPDATE_CHAT_COLOR (chatType, r, g, b)
+local function UPDATE_CHAT_COLOR(chatType, r, g, b)
 
 	if ( not chatType or not r or not g or not b ) then
 		log("Ignoring malformed UPDATE_CHAT_COLOR event.")
@@ -258,7 +258,7 @@ local function UPDATE_CHAT_COLOR (chatType, r, g, b)
 	SaveChannelColorToDB(index, r, g, b)
 end
 
-local function EventHandler (self, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+local function EventHandler(self, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 
 	if ( event == "PLAYER_ENTERING_WORLD" ) then
 
