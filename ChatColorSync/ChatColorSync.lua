@@ -258,7 +258,7 @@ local function UPDATE_CHAT_COLOR (chatType, r, g, b)
 	SaveChannelColorToDB(index, r, g, b)
 end
 
-function ChatColorSync_OnEvent (frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+local function EventHandler (self, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 
 	if ( event == "PLAYER_ENTERING_WORLD" ) then
 
@@ -267,8 +267,8 @@ function ChatColorSync_OnEvent (frame, event, arg1, arg2, arg3, arg4, arg5, arg6
 			ChatColorSync = { }
 		end
 
-		this:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE")
-		this:RegisterEvent("UPDATE_CHAT_COLOR")
+		self:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE")
+		self:RegisterEvent("UPDATE_CHAT_COLOR")
 
 		if ( not Loaded ) then
 			SyncAllChannels()
@@ -279,8 +279,8 @@ function ChatColorSync_OnEvent (frame, event, arg1, arg2, arg3, arg4, arg5, arg6
 
 	elseif ( event == "PLAYER_LEAVING_WORLD" ) then
 
-		this:UnregisterEvent("CHAT_MSG_CHANNEL_NOTICE")
-		this:UnregisterEvent("UPDATE_CHAT_COLOR")
+		self:UnregisterEvent("CHAT_MSG_CHANNEL_NOTICE")
+		self:UnregisterEvent("UPDATE_CHAT_COLOR")
 
 	elseif ( event == "CHAT_MSG_CHANNEL_NOTICE" ) then
 
@@ -319,4 +319,10 @@ function ChatColorSync_OnEvent (frame, event, arg1, arg2, arg3, arg4, arg5, arg6
 		UPDATE_CHAT_COLOR(arg1, arg2, arg3, arg4)
 	end
 end
+
+-- main
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+frame:RegisterEvent("PLAYER_LEAVING_WORLD")
+frame:SetScript("OnEvent", EventHandler)
 

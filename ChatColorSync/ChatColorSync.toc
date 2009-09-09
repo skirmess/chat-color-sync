@@ -6,4 +6,4 @@
 ## Dependencies:
 ## SavedVariables: ChatColorSync
 ## X-Website: http://code.google.com/p/chat-color-sync/
-ChatColorSync.xml
+ChatColorSync.lua
