@@ -1,8 +1,8 @@
 
 -- Copyright (c) 2009, Sven Kirmess
 
-local ChatColorSync_Version = 5
-local ChatColorSync_loaded = false
+local Version = 5
+local Loaded = false
 
 local function log (msg)
 
@@ -262,7 +262,7 @@ function ChatColorSync_OnEvent (frame, event, arg1, arg2, arg3, arg4, arg5, arg6
 
 	if ( event == "PLAYER_ENTERING_WORLD" ) then
 
-		if ( ( not ChatColorSync_loaded ) and
+		if ( ( not Loaded ) and
 		     ( ChatColorSync == nil ) ) then
 			ChatColorSync = { }
 		end
@@ -270,11 +270,11 @@ function ChatColorSync_OnEvent (frame, event, arg1, arg2, arg3, arg4, arg5, arg6
 		this:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE")
 		this:RegisterEvent("UPDATE_CHAT_COLOR")
 
-		if ( not ChatColorSync_loaded ) then
+		if ( not Loaded ) then
 			SyncAllChannels()
 
-			log(string.format("Version %i loaded.", ChatColorSync_Version))
-			ChatColorSync_loaded = true
+			log(string.format("Version %i loaded.", Version))
+			Loaded = true
 		end
 
 	elseif ( event == "PLAYER_LEAVING_WORLD" ) then
