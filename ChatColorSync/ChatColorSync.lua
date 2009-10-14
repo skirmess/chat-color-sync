@@ -29,9 +29,9 @@ local function GetChannelGenericName(name)
 		return name
 	end
 
-	local name = string.sub(name, 1, i - 1)
+	local genericName = string.sub(name, 1, i - 1)
 
-	return name
+	return genericName
 end
 
 local function GetChannelNameByTypeName(chatType)
