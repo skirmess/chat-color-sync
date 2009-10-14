@@ -79,6 +79,15 @@ local function SaveChannelColorToDB(index, r, g, b)
 	ChatColorSync[index].b = b
 end
 
+local function SaveChannelColorNameByClassToDB(index, colorNameByClass)
+
+	if ( ChatColorSync[index] == nil ) then
+		ChatColorSync[index] = { }
+	end
+
+	ChatColorSync[index].colorNameByClass = colorNameByClass
+end
+
 local function GetChatTypeInfo(chatType)
 
 	if ( ( ChatTypeInfo[chatType] == nil ) or
@@ -94,12 +103,17 @@ local function GetChatTypeInfo(chatType)
 	local g = math.floor(ChatTypeInfo[chatType].g * 255)
 	local b = math.floor(ChatTypeInfo[chatType].b * 255)
 
-	return r, g, b
+	local colorNameByClass = 0
+	if ( ChatTypeInfo[chatType].colorNameByClass ) then
+		colorNameByClass = 1
+	end
+
+	return r, g, b, colorNameByClass
 end
 
 local function SynchronizeChannelColorWithDB(chatType, name)
 
-	local r, g, b = GetChatTypeInfo(chatType)
+	local r, g, b, colorNameByClass = GetChatTypeInfo(chatType)
 
 	if ( not r or not g or not b ) then
 		return
@@ -118,8 +132,22 @@ local function SynchronizeChannelColorWithDB(chatType, name)
 
 		-- There is no entry in the DB yet.
 		SaveChannelColorToDB(name, r, g, b)
+		SaveChannelColorNameByClassToDB(name, colorNameByClass)
 
 		return
+	end
+
+	if ( not ChatColorSync[name].colorNameByClass ) then
+		SaveChannelColorNameByClassToDB(name, colorNameByClass)
+	elseif ( colorNameByClass ~= ChatColorSync[name].colorNameByClass ) then
+
+		if ( ChatColorSync[name].colorNameByClass == 1 ) then
+			log(string.format("Enable class color for channel '%s'", name))
+			SetChatColorNameByClass(chatType, true)
+		else
+			log(string.format("Disable class color for channel '%s'", name))
+			SetChatColorNameByClass(chatType, false)
+		end
 	end
 
 	if ( ( r and ( r ~= ChatColorSync[name].r ) ) or
@@ -247,12 +275,32 @@ local function UPDATE_CHAT_COLOR(chatType, r, g, b)
 		return
 	end
 
-	-- local r, g, b = GetChatTypeInfo(chatType)
 	local r = math.floor(r * 255)
 	local g = math.floor(g * 255)
 	local b = math.floor(b * 255)
 
 	SaveChannelColorToDB(index, r, g, b)
+end
+
+local function UPDATE_CHAT_COLOR_NAME_BY_CLASS(chatType, colorNameByClass)
+
+	if ( not chatType ) then
+		log("Ignoring malformed UPDATE_CHAT_COLOR_NAME_BY_CLASS event.")
+		return
+	end
+
+	local index = GetChannelNameByTypeName(chatType)
+
+	if ( index == nil ) then
+		return
+	end
+
+	local i = 0
+	if ( colorNameByClass ) then
+		i = 1
+	end
+
+	SaveChannelColorNameByClassToDB(index, i)
 end
 
 local function EventHandler(self, event, ...)
@@ -268,6 +316,7 @@ local function EventHandler(self, event, ...)
 
 		self:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE")
 		self:RegisterEvent("UPDATE_CHAT_COLOR")
+		self:RegisterEvent("UPDATE_CHAT_COLOR_NAME_BY_CLASS")
 
 		if ( not Loaded ) then
 			SyncAllChannels()
@@ -280,6 +329,7 @@ local function EventHandler(self, event, ...)
 
 		self:UnregisterEvent("CHAT_MSG_CHANNEL_NOTICE")
 		self:UnregisterEvent("UPDATE_CHAT_COLOR")
+		self:UnregisterEvent("UPDATE_CHAT_COLOR_NAME_BY_CLASS")
 
 	elseif ( event == "CHAT_MSG_CHANNEL_NOTICE" ) then
 
@@ -316,6 +366,13 @@ local function EventHandler(self, event, ...)
 		-- arg4		blue
 
 		UPDATE_CHAT_COLOR(arg1, arg2, arg3, arg4)
+	elseif ( event == "UPDATE_CHAT_COLOR_NAME_BY_CLASS" ) then
+
+		-- arg1		Chat type
+		--
+		-- arg2		colorNameByClass
+
+		UPDATE_CHAT_COLOR_NAME_BY_CLASS(arg1, arg2)
 	end
 end
 

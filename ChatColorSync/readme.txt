@@ -9,6 +9,7 @@ characters.
 *** Changelog
 
 Version 5
+ * Sync the class color configuration of the chat channels.
  * Code cleanup.
  * No longer use an XML file.
 
