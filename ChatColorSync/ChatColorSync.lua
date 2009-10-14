@@ -324,7 +324,7 @@ end
 
 -- main
 local frame = CreateFrame("Frame")
+frame:SetScript("OnEvent", EventHandler)
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:RegisterEvent("PLAYER_LEAVING_WORLD")
-frame:SetScript("OnEvent", EventHandler)
 
