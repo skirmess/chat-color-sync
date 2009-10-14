@@ -77,7 +77,6 @@ local function SaveChannelColorToDB(index, r, g, b)
 	ChatColorSync[index].r = r
 	ChatColorSync[index].g = g
 	ChatColorSync[index].b = b
-	ChatColorSync[index].set_by = UnitName("player")
 end
 
 local function GetChatTypeInfo(chatType)
@@ -109,8 +108,7 @@ local function SynchronizeChannelColorWithDB(chatType, name)
 	if ( ( not ChatColorSync[name] ) or
 	     ( not ChatColorSync[name].r) or
 	     ( not ChatColorSync[name].g) or
-	     ( not ChatColorSync[name].b) or
-	     ( not ChatColorSync[name].set_by) ) then
+	     ( not ChatColorSync[name].b) ) then
 
 		if ( ChatColorSync[name] ) then
 			log("Broken entry in SavedVariables.lua detected for channel '"..name.."'. Removing the broken entry.")
@@ -128,12 +126,11 @@ local function SynchronizeChannelColorWithDB(chatType, name)
 	     ( g and ( g ~= ChatColorSync[name].g ) ) or
 	     ( b and ( b ~= ChatColorSync[name].b ) ) ) then
 
-		log(string.format("Setting color for channel '%s' to %i/%i/%i (changed by %s)",
+		log(string.format("Setting color for channel '%s' to %i/%i/%i",
 			name,
 			ChatColorSync[name].r,
 			ChatColorSync[name].g,
-			ChatColorSync[name].b,
-			ChatColorSync[name].set_by)
+			ChatColorSync[name].b)
 		)
 
 		ChangeChatColor(
