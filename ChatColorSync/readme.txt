@@ -9,7 +9,7 @@ characters.
 *** Changelog
 
 Version 6
- * Updated TOC for WoW 3.2.2
+ * Updated TOC for WoW 3.3
  * Added the new channels ACHIEVEMENT, GUILD_ACHIEVEMENT, PARTY_LEADER, TARGETICONS to the sync list.
 
 Version 5
