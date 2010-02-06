@@ -191,13 +191,16 @@ local function SyncAllChannels()
 	local channelsToSync = {
 
 		-- Player Messages
+		"ACHIEVEMENT",
 		"BATTLEGROUND",
 		"BATTLEGROUND_LEADER",
 		"EMOTE",
 		"GUILD",
+		"GUILD_ACHIEVEMENT",
 		"MONSTER_PARTY",
 		"OFFICER",
 		"PARTY",
+		"PARTY_LEADER",
 		"RAID",
 		"RAID_LEADER",
 		"RAID_WARNING",
@@ -239,6 +242,7 @@ local function SyncAllChannels()
 		"IGNORED"
 		"RESTRICTED",
 		"SYSTEM",
+		"TARGETICONS",
 	}
 
 	local x, chatType

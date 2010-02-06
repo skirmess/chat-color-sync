@@ -10,6 +10,7 @@ characters.
 
 Version 6
  * Updated TOC for WoW 3.2.2
+ * Added the new channels ACHIEVEMENT, GUILD_ACHIEVEMENT, PARTY_LEADER, TARGETICONS to the sync list.
 
 Version 5
  * Sync the class color configuration of the chat channels.
