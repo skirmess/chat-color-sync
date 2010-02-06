@@ -239,10 +239,10 @@ local function SyncAllChannels()
 		"AFK",
 		"DND",
 		"FILTERED",
-		"IGNORED"
+		"IGNORED",
 		"RESTRICTED",
 		"SYSTEM",
-		"TARGETICONS",
+		"TARGETICONS"
 	}
 
 	local x, chatType
