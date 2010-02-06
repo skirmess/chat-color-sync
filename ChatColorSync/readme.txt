@@ -8,6 +8,9 @@ characters.
 
 *** Changelog
 
+Version 6
+ * Updated TOC for WoW 3.2.2
+
 Version 5
  * Sync the class color configuration of the chat channels.
  * Code cleanup.
