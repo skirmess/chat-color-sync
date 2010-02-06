@@ -191,54 +191,54 @@ local function SyncAllChannels()
 	local channelsToSync = {
 
 		-- Player Messages
-		"SAY",
+		"BATTLEGROUND",
+		"BATTLEGROUND_LEADER",
 		"EMOTE",
-		"TEXT_EMOTE",
-		"YELL",
 		"GUILD",
-		"OFFICER",
-		"WHISPER",
-		"WHISPER_INFORM",
-		"PARTY",
 		"MONSTER_PARTY",
+		"OFFICER",
+		"PARTY",
 		"RAID",
 		"RAID_LEADER",
 		"RAID_WARNING",
-		"BATTLEGROUND",
-		"BATTLEGROUND_LEADER",
+		"SAY",
+		"TEXT_EMOTE",
+		"WHISPER",
+		"WHISPER_INFORM",
+		"YELL",
 
 		-- Creature Messages
-		"MONSTER_SAY",
 		"MONSTER_EMOTE",
-		"MONSTER_YELL",
+		"MONSTER_SAY",
 		"MONSTER_WHISPER",
+		"MONSTER_YELL",
 		"RAID_BOSS_EMOTE",
 		"RAID_BOSS_WHISPER",
 
 		-- Combat
-		"COMBAT_XP_GAIN",
-		"COMBAT_HONOR_GAIN",
 		"COMBAT_FACTION_CHANGE",
-		"SKILL",
+		"COMBAT_HONOR_GAIN",
+		"COMBAT_MISC_INFO",
+		"COMBAT_XP_GAIN",
 		"LOOT",
 		"MONEY",
-		"TRADESKILLS",
 		"OPENING",
 		"PET_INFO",
-		"COMBAT_MISC_INFO",
+		"SKILL",
+		"TRADESKILLS",
 
 		-- PvP
-		"BG_SYSTEM_HORDE",
 		"BG_SYSTEM_ALLIANCE",
+		"BG_SYSTEM_HORDE",
 		"BG_SYSTEM_NEUTRAL",
 
 		-- Other
-		"SYSTEM",
-		"RESTRICTED",
-		"FILTERED",
 		"AFK",
 		"DND",
+		"FILTERED",
 		"IGNORED"
+		"RESTRICTED",
+		"SYSTEM",
 	}
 
 	local x, chatType
