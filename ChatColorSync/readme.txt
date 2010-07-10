@@ -8,6 +8,9 @@ characters.
 
 *** Changelog
 
+Version 7
+ * Replaced static list of channels to sync with a function that gets all channels available and syncs all but REPLY.
+
 Version 6
  * Updated TOC for WoW 3.3
  * Added the new channels ACHIEVEMENT, GUILD_ACHIEVEMENT, PARTY_LEADER, TARGETICONS to the sync list.

@@ -1,7 +1,7 @@
 
 -- Copyright (c) 2009-2010, Sven Kirmess
 
-local Version = 6
+local Version = 7
 local Loaded = false
 
 local function log(msg)
@@ -15,7 +15,7 @@ end
 
 --
 -- Remove the zone suffix from a channel, if present, and return
--- its geenric name.
+-- its generic name.
 --
 -- Input: "General - Ironforge"
 -- Output: "General"
@@ -187,68 +187,39 @@ local function SyncAllChannels()
 		end
 	end
 
-	-- Sunc all other channels
-	local channelsToSync = {
-
-		-- Player Messages
-		"ACHIEVEMENT",
-		"BATTLEGROUND",
-		"BATTLEGROUND_LEADER",
-		"EMOTE",
-		"GUILD",
-		"GUILD_ACHIEVEMENT",
-		"MONSTER_PARTY",
-		"OFFICER",
-		"PARTY",
-		"PARTY_LEADER",
-		"RAID",
-		"RAID_LEADER",
-		"RAID_WARNING",
-		"SAY",
-		"TEXT_EMOTE",
-		"WHISPER",
-		"WHISPER_INFORM",
-		"YELL",
-
-		-- Creature Messages
-		"MONSTER_EMOTE",
-		"MONSTER_SAY",
-		"MONSTER_WHISPER",
-		"MONSTER_YELL",
-		"RAID_BOSS_EMOTE",
-		"RAID_BOSS_WHISPER",
-
-		-- Combat
-		"COMBAT_FACTION_CHANGE",
-		"COMBAT_HONOR_GAIN",
-		"COMBAT_MISC_INFO",
-		"COMBAT_XP_GAIN",
-		"LOOT",
-		"MONEY",
-		"OPENING",
-		"PET_INFO",
-		"SKILL",
-		"TRADESKILLS",
-
-		-- PvP
-		"BG_SYSTEM_ALLIANCE",
-		"BG_SYSTEM_HORDE",
-		"BG_SYSTEM_NEUTRAL",
-
-		-- Other
-		"AFK",
-		"DND",
-		"FILTERED",
-		"IGNORED",
-		"RESTRICTED",
-		"SYSTEM",
-		"TARGETICONS"
-	}
-
-	local x, chatType
-	for x, chatType in pairs(channelsToSync)
+	-- Sunc all channels but CHANNEL<n> and REPLY
+	local channel
+	for channel in pairs(ChatTypeInfo)
 	do
-		SynchronizeChannelColorWithDB(chatType, chatType)
+		repeat
+			if ( channel == nil ) then
+				break
+			end
+
+			if ( channel == "REPLY" ) then
+				-- ignore the REPLY channel
+				break
+			end
+
+			local channelNumber, count = string.gsub(channel, "CHANNEL", "")
+
+			if ( count > 1 ) then
+				-- should never happen
+				log("Could not understand channel '"..channel.."'.")
+				return
+			end
+
+			if ( count == 1 ) then
+				-- The channel name starts with CHANNEL
+				local cid = tonumber(channelNumber)
+
+				if ( cid ~= nil ) then
+					break
+				end
+			end
+		
+			SynchronizeChannelColorWithDB(channel, channel)
+		until true
 	end
 end
 
