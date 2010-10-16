@@ -8,6 +8,9 @@ characters.
 
 *** Changelog
 
+Version 8
+ * Updated TOC for WoW 4.0.1
+
 Version 7
  * Replaced static list of channels to sync with a function that gets all channels available and syncs all but REPLY.
 
