@@ -1,4 +1,4 @@
-## Interface: 40000
+## Interface: 40300
 ## Title: ChatColorSync
 ## Author: Sven Kirmess
 ## Notes: Synchronizes the chat channel color between chars

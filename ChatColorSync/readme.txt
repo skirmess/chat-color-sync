@@ -8,6 +8,9 @@ characters.
 
 *** Changelog
 
+Version 9
+ * Updated TOC for WoW 4.3.0
+
 Version 8
  * Updated TOC for WoW 4.0.1
 
