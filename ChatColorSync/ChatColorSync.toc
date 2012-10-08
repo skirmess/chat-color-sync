@@ -1,0 +1,9 @@
+## Interface: 50001
+## Title: ChatColorSync
+## Author: Sven Kirmess
+## Notes: Synchronizes the chat channel color between chars
+## OptionalDeps:
+## Dependencies:
+## SavedVariables: ChatColorSync
+## X-Website: http://code.google.com/p/chat-color-sync/
+ChatColorSync.lua
