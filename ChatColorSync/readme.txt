@@ -8,6 +8,9 @@ characters.
 
 *** Changelog
 
+Version 12
+ * Take the list of existing channels from the color menu.
+
 Version 11
  * Updated TOC for WoW 5.2.0
 

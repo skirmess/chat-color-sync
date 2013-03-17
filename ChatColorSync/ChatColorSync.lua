@@ -1,7 +1,7 @@
 
--- Copyright (c) 2009-2012, Sven Kirmess
+-- Copyright (c) 2009-2013, Sven Kirmess
 
-local Version = 11
+local Version = 12
 local Loaded = false
 
 local function log(msg)
@@ -176,50 +176,30 @@ end
 
 local function SyncAllChannels()
 
-	-- Sync the 10 custom channels
-	local i
-	for i=1,10 do
-		local id, name = GetChannelName(i)
-		if ( ( id > 0 ) and ( name ~= nil ) ) then
-			name = GetChannelGenericName(name)
+	local cnr, channel
+	for cnr, channel in pairs(CHAT_CONFIG_CHAT_LEFT) do
+		SynchronizeChannelColorWithDB(channel.type, channel.type)
+	end
 
-			SynchronizeChannelColorWithDB("CHANNEL"..id, name)
+	for cnr, channel in pairs(CHAT_CONFIG_CHAT_CREATURE_LEFT)
+	do
+		if ( ( channel.type ~= "MONSTER_BOSS_EMOTE" ) and ( channel.type ~= "MONSTER_BOSS_WHISPER" ) ) then
+			SynchronizeChannelColorWithDB(channel.type, channel.type)
 		end
 	end
 
-	-- Sunc all channels but CHANNEL<n> and REPLY
-	local channel
-	for channel in pairs(ChatTypeInfo)
-	do
-		repeat
-			if ( channel == nil ) then
-				break
-			end
+	for cnr, channel in pairs(CHAT_CONFIG_OTHER_COMBAT) do
+		SynchronizeChannelColorWithDB(channel.type, channel.type)
+	end
 
-			if ( channel == "REPLY" ) then
-				-- ignore the REPLY channel
-				break
-			end
+	for cnr, channel in pairs(CHAT_CONFIG_OTHER_PVP) do
+		SynchronizeChannelColorWithDB(channel.type, channel.type)
+	end
 
-			local channelNumber, count = string.gsub(channel, "CHANNEL", "")
-
-			if ( count > 1 ) then
-				-- should never happen
-				log("Could not understand channel '"..channel.."'.")
-				return
-			end
-
-			if ( count == 1 ) then
-				-- The channel name starts with CHANNEL
-				local cid = tonumber(channelNumber)
-
-				if ( cid ~= nil ) then
-					break
-				end
-			end
-		
-			SynchronizeChannelColorWithDB(channel, channel)
-		until true
+	for cnr, channel in pairs(CHAT_CONFIG_OTHER_SYSTEM) do
+		if ( channel.type ~= "ERRORS" ) then
+			SynchronizeChannelColorWithDB(channel.type, channel.type)
+		end
 	end
 end
 
