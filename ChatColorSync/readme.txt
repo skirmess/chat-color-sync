@@ -8,6 +8,10 @@ characters.
 
 *** Changelog
 
+Version 14
+ * Changed project web page to GitHub
+   https://github.com/skirmess/chat-color-sync
+
 Version 13
  * Updated TOC for WoW 6.1.0
 

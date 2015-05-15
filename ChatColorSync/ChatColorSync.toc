@@ -5,5 +5,5 @@
 ## OptionalDeps:
 ## Dependencies:
 ## SavedVariables: ChatColorSync
-## X-Website: http://code.google.com/p/chat-color-sync/
+## X-Website: https://github.com/skirmess/chat-color-sync
 ChatColorSync.lua

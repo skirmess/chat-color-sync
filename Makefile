@@ -1,7 +1,7 @@
 
 .PHONY: clean release
 
-VERSION=13
+VERSION=14
 NAME=ChatColorSync
 
 clean:
